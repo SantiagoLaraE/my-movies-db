@@ -1,0 +1,42 @@
+/* Top Movie & Details movie */
+
+.movie__info,
+.movie__actions {
+  justify-content: flex-start;
+}
+.movie__description {
+  text-align: left;
+}
+
+.top-movie {
+  margin-top: 250px;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    var(--dark-color) 100%
+  );
+}
+.movie-details {
+  margin-top: 54px;
+}
+.movie-details {
+  background: linear-gradient(to bottom, transparent 0%, var(--dark-color) 50%);
+}
+
+.movie__container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  place-items: center;
+  grid-gap: 24px;
+  margin-bottom: 32px;
+}
+.movie__container .movie__poster {
+  display: block;
+}
+.movie__container .movie__poster img {
+  width: 100%;
+}
+.movie__container .movie__text {
+  overflow: hidden;
+  width: 100%;
+}

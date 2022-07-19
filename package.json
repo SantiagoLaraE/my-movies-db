@@ -1,0 +1,19 @@
+{
+  "name": "my-movies-db",
+  "version": "1.0.0",
+  "description": "Práctica Curso de Consumo de API Rest con JS",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantiagoLaraE/my-movies-db.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SantiagoLaraE/my-movies-db/issues"
+  },
+  "homepage": "https://github.com/SantiagoLaraE/my-movies-db#readme"
+}

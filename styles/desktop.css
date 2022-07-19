@@ -1,0 +1,60 @@
+/*Header - Nav*/
+
+/* --- Header ---*/
+.header__logo {
+  justify-self: flex-start;
+}
+.header__container {
+  grid-template-columns: 137px 1fr 200px;
+  height: 80px;
+}
+/* --- Nav ---*/
+.header__nav ul {
+  position: static;
+  width: initial;
+  height: initial;
+  background-color: initial;
+  flex-direction: row;
+  visibility: initial;
+  transform: none;
+}
+
+.header__search {
+  position: static;
+  width: 100%;
+  height: auto;
+  background-color: initial;
+  padding: 0;
+  visibility: initial;
+  opacity: 1;
+  transform: none;
+  transition: all 0.5s ease;
+}
+
+.header__nav-toggle,
+.header__search-toggle {
+  display: none;
+}
+
+/*Movie*/
+
+.top-movie .movie__description .overview {
+  display: block;
+}
+.movie__img {
+  top: 80px;
+}
+.movie__img img {
+  object-position: center;
+}
+.movie__container {
+  grid-template-columns: 1fr 2fr;
+}
+
+.categories-preview .categories-preview__list--scroll {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-x: initial;
+  gap: 8px;
+}
