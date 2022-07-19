@@ -24,11 +24,11 @@
 }
 
 .movie__container {
-  display: grid;
   grid-template-columns: 1fr 2fr;
   place-items: center;
   grid-gap: 24px;
   margin-bottom: 32px;
+  display: grid;
 }
 .movie__container .movie__poster {
   display: block;
