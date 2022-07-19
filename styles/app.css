@@ -133,7 +133,7 @@ main {
 .header__nav-toggle {
   padding: 8px;
   cursor: pointer;
-  z-index: 101;
+  z-index: 201;
 }
 
 .header__nav-toggle div {
@@ -170,7 +170,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 200;
   visibility: hidden;
   transition: all 0.5s ease;
   transform: translateX(-100vw);
