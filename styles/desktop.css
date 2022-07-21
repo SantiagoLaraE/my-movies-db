@@ -1,3 +1,7 @@
+main {
+  margin-top: 80px;
+}
+
 /*Header - Nav*/
 
 /* --- Header ---*/
@@ -39,7 +43,9 @@
 }
 
 /*Movie*/
-
+.top-movie{
+  margin-top: 350px;
+}
 .top-movie .movie__description .overview {
   display: block;
 }

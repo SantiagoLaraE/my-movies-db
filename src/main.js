@@ -13,7 +13,6 @@ async function getTrendingMoviesPreview() {
     
     const movies = data.results;
 
-    const listContainer = document.querySelector('.trending-movies .movies-preview__list--scroll');
     const fragment = new DocumentFragment();
     
     movies.forEach(movie => {
@@ -37,7 +36,8 @@ async function getTrendingMoviesPreview() {
         fragment.appendChild(figure);
 
     });
-    listContainer.appendChild(fragment);
+    trendingMoviesPreviewList.innerHTML = '';
+    trendingMoviesPreviewList.appendChild(fragment);
 
 
 
@@ -47,7 +47,6 @@ async function getMovieCategoriesPreview(){
     const {data} = await api('/genre/movie/list');
     const categories = data.genres;
 
-    const listContainer = document.querySelector('.categories-preview .categories-preview__list--scroll');
     const fragment = new DocumentFragment();
 
     categories.forEach(category => {
@@ -63,7 +62,8 @@ async function getMovieCategoriesPreview(){
 
         fragment.appendChild(categoryContainer);
     });
-    listContainer.appendChild(fragment);
+    categoriesPreviewList.innerHTML = '';
+    categoriesPreviewList.appendChild(fragment);
 }
 
 

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <header class="header">
+  <header id="header" class="header">
     <div class="header__container container">
       <div class="header__nav-toggle">
         <div></div>
@@ -38,20 +38,22 @@
         </ul>
       </nav>
       <div class="header__search">
-        <input type="text" placeholder="Search" />
+        <form id="searchForm">
+          <input type="text" placeholder="Search" />
+        </form>
       </div>
     </div>
   </header>
-  <section class="movie__img">
+  <section id="movieImgSection" class="movie__img">
     <picture>
-      <source media="(min-width: 768px)" srcset="
-            https://image.tmdb.org/t/p/original/IYUD7rAIXzBM91TT3Z5fILUS7n.jpg
+      <source class="movieImgSection__poster" media="(min-width: 768px)" srcset="
+      https://image.tmdb.org/t/p/original/aEGiJJP91HsKVTEPy1HhmN0wRLm.jpg
           " />
-      <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zFTLPipninMF4THDbdkQUZLWMEw.jpg" alt="" />
+      <img class="movieImgSection__backdrop" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zFTLPipninMF4THDbdkQUZLWMEw.jpg" alt="" />
     </picture>
   </section>
   <main>
-    <section class="top-movie">
+    <section id="topMovieSection" class="top-movie">
       <div class="movie__container container">
         <div class="movie__text">
           <div class="movie__info">
@@ -80,7 +82,7 @@
       </div>
     </section>
 
-    <section class="movie-details inactive">
+    <section id="movieDetailsSection" class="movie-details">
       <div class="movie__container container">
         <div class="movie__poster">
           <img src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg" alt="" />
@@ -146,9 +148,7 @@
               <img class="movie-container__img"
                 src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg" alt="movieTitle" />
               <figcaption class="movie-container__title">
-                Nombre de pelicula super largo Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Facere eos est voluptas?
-                Corrupti, voluptatem vitae!
+                Nombre de pelicula
               </figcaption>
             </figure>
           </article>
@@ -156,11 +156,11 @@
       </div>
     </section>
 
-    <section class="movies-preview trending-movies section">
+    <section id="trendingPreviewSection" class="movies-preview trending-movies section">
       <div class="container">
         <div class="movies-preview__header">
           <h2 class="movies-preview__title">Trending</h2>
-          <button class="button button--small">see all</button>
+          <button class="button button--small" id="trendingPreview-btn">see all</button>
         </div>
         <article class="movies-preview__list--scroll">
           <!-- <figure class="movie-container">
@@ -174,7 +174,7 @@
       </div>
     </section>
 
-    <section class="categories-preview section">
+    <section id="categoriesPreviewSection" class="categories-preview section">
       <div class="container">
         <div class="categories-preview__header">
           <h2 class="categories-preview__title">Categories</h2>
@@ -187,7 +187,7 @@
       </div>
     </section>
 
-    <section class="movies-preview popular-movies section">
+    <section id="popularPreviewSection" class="movies-preview popular-movies section">
       <div class="container">
         <div class="movies-preview__header">
           <h2 class="movies-preview__title">Popular</h2>
@@ -207,7 +207,7 @@
       </div>
     </section>
 
-    <section class="movies-preview upcoming-movies section">
+    <section id="upcomingPreviewSection" class="movies-preview upcoming-movies section">
       <div class="container">
         <div class="movies-preview__header">
           <h2 class="movies-preview__title">Upcoming</h2>
@@ -227,11 +227,11 @@
       </div>
     </section>
 
-    <section class="movies-preview generic-movies section inactive">
+    <section id="genericListSection" class="movies-preview generic-movies section">
       <div class="container">
         <div class="movies-preview__header">
           <h2 class="movies-preview__title">Popular</h2>
-          <button class="button">
+          <button class="button buttonBack">
             <img src="./assets/goback-icon.svg" alt="" /><span>Go back</span>
           </button>
         </div>

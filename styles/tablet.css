@@ -16,6 +16,17 @@
     var(--dark-color) 100%
   );
 }
+
+.movie__img::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, black, transparent);
+  top: 0;
+  left: 0;
+}
 .movie-details {
   margin-top: 54px;
 }
@@ -39,4 +50,14 @@
 .movie__container .movie__text {
   overflow: hidden;
   width: 100%;
+}
+.generic-movies .button span {
+  display: block;
+}
+.movies-preview__header {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  grid-gap: 16px;
 }

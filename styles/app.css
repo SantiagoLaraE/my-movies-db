@@ -101,7 +101,11 @@ img {
 main {
   margin-top: 60px;
 }
-
+section{
+  animation-name: fade_in_show;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+}
 .section {
   position: relative;
   padding-top: 24px;
@@ -232,7 +236,9 @@ main {
   transition: all 0.5s ease;
   z-index: 100;
 }
-
+.header__search form {
+  width: 100%;
+}
 .header__search.open {
   visibility: initial;
   opacity: 1;
@@ -259,6 +265,11 @@ main {
 .movie__container .movie__poster {
   display: none;
 }
+.goBack {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 /*IMG*/
 .movie__img {
@@ -270,7 +281,7 @@ main {
   overflow: hidden;
 }
 
-.movie__img img {
+.movie__img picture img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -397,6 +408,7 @@ main {
 .movies-preview__list--scroll .movie-container {
   min-width: 136px;
   max-width: 136px;
+  cursor:pointer;
 }
 
 .movies-preview__list {
@@ -451,7 +463,7 @@ main {
 
 .category-container .category-title {
   font-weight: 100;
-  white-space: nowrap ;
+  white-space: nowrap;
 }
 
 .generic-movies .button span {
@@ -471,6 +483,18 @@ footer {
 
 /*Navigation*/
 
-.inactive{
+.inactive {
   display: none;
+}
+
+@keyframes fade_in_show {
+  0% {
+    opacity: 0;
+    transform: translateY(150px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
