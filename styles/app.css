@@ -404,11 +404,14 @@ section{
   gap: 16px;
   padding-bottom: 16px;
 }
+.movie-container{
+  cursor: pointer;
+}
 
 .movies-preview__list--scroll .movie-container {
   min-width: 136px;
   max-width: 136px;
-  cursor:pointer;
+
 }
 
 .movies-preview__list {

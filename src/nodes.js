@@ -11,6 +11,8 @@ const genericListSection = document.querySelector('#genericListSection');
 
 
 /* ----- Lists & Containers ----- */
+const popularMoviesPreviewList = document.querySelector('#popularPreviewSection .movies-preview__list--scroll');
+const upcomingMoviesPreviewList = document.querySelector('#upcomingPreviewSection .movies-preview__list--scroll');
 const trendingMoviesPreviewList = document.querySelector('#trendingPreviewSection .movies-preview__list--scroll');
 const categoriesPreviewList  = document.querySelector('#categoriesPreviewSection .categories-preview__list--scroll');
 const movieDetailCategoriesList   = document.querySelector('#movieDetailsSection .categories-preview__list--scroll');
