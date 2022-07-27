@@ -265,10 +265,10 @@ section{
 .movie__container .movie__poster {
   display: none;
 }
-.goBack {
+.movie-details .buttonBack {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -378px;
+  right: 16px;
 }
 
 /*IMG*/
@@ -322,13 +322,13 @@ section{
   display: none;
 }
 
-.movie__info .popularity {
+.movie__info .vote-average {
   display: flex;
   align-items: center;
   grid-gap: 4px;
 }
 
-.movie__info .popularity::before {
+.movie__info .vote-average::before {
   content: "";
   display: inline-block;
   width: 24px;
@@ -406,6 +406,13 @@ section{
 }
 .movie-container{
   cursor: pointer;
+  animation-name: movieAnimation;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+}
+@keyframes movieAnimation {
+  from{opacity: 0; transform: translateY(50px);}
+  to{opacity: 1; transform: translateY(0px);}
 }
 
 .movies-preview__list--scroll .movie-container {
@@ -469,7 +476,7 @@ section{
   white-space: nowrap;
 }
 
-.generic-movies .button span {
+.buttonBack span {
   display: none;
 }
 

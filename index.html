@@ -1,200 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Movies DB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/app.css" />
+    <link
+      rel="stylesheet"
+      href="./styles/tablet.css"
+      media="(min-width: 768px)"
+    />
+    <link
+      rel="stylesheet"
+      href="./styles/desktop.css"
+      media="(min-width: 1024px)"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Movies DB</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles/app.css" />
-  <link rel="stylesheet" href="./styles/tablet.css" media="(min-width: 768px)" />
-  <link rel="stylesheet" href="./styles/desktop.css" media="(min-width: 1024px)" />
-</head>
-
-<body>
-  <header id="header" class="header">
-    <div class="header__container container">
-      <div class="header__nav-toggle">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="header__logo">
-        <img src="./assets/mymoviesdb_logo.svg" alt="" />
-      </div>
-      <div class="header__search-toggle">
-        <img src="./assets/search-icon.svg" alt="" />
-      </div>
-      <nav class="header__nav">
-        <ul>
-          <li><a class="nav-links" href="">Home</a></li>
-          <li><a class="nav-links" href="">Trending Movies</a></li>
-          <li><a class="nav-links" href="">Categories</a></li>
-          <li><a class="nav-links" href="">Popular</a></li>
-          <li><a class="nav-links" href="">Upcoming</a></li>
-        </ul>
-      </nav>
-      <div class="header__search">
-        <form id="searchForm">
-          <input type="text" placeholder="Search" />
-        </form>
-      </div>
-    </div>
-  </header>
-  <section id="movieImgSection" class="movie__img">
-    <picture>
-      <source class="movieImgSection__poster" media="(min-width: 768px)" srcset="
-      https://image.tmdb.org/t/p/original/aEGiJJP91HsKVTEPy1HhmN0wRLm.jpg
-          " />
-      <img class="movieImgSection__backdrop" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/zFTLPipninMF4THDbdkQUZLWMEw.jpg" alt="" />
-    </picture>
-  </section>
-  <main>
-    <section id="topMovieSection" class="top-movie">
-      <div class="movie__container container">
-        <div class="movie__text">
-          <div class="movie__info">
-            <div class="popularity">7.5</div>
-            <div class="runtime">1h 55m</div>
-            <div class="tag">Trending</div>
-          </div>
-          <div class="movie__description">
-            <h1 class="title">Doctor Strange in the Multiverse of Madness</h1>
-            <p class="overview">
-              Doctor Strange, with the help of mystical allies both old and
-              new, traverses the mind-bending and dangerous alternate
-              realities of the Multiverse to confront a mysterious new
-              adversary.
-            </p>
-          </div>
-          <div class="movie__actions">
-            <button class="button">
-              <img src="./assets/play-icon.svg" alt="" /><span>Play Trailer</span>
-            </button>
-            <button class="button button-secondary">
-              <img src="./assets/info-icon.svg" alt="" /><span>Details</span>
-            </button>
-          </div>
+  <body>
+    <header id="header" class="header">
+      <div class="header__container container">
+        <div class="header__nav-toggle">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="header__logo">
+          <img src="./assets/mymoviesdb_logo.svg" alt="" />
+        </div>
+        <div class="header__search-toggle">
+          <img src="./assets/search-icon.svg" alt="" />
+        </div>
+        <nav class="header__nav">
+          <ul>
+            <li><a class="nav-links" href="#">Home</a></li>
+            <li><a class="nav-links" href="#trends">Trending Movies</a></li>
+            <li>
+              <a class="nav-links" href="#categoriesPreviewSection"
+                >Categories</a
+              >
+            </li>
+            <li><a class="nav-links" href="#popular">Popular</a></li>
+            <li><a class="nav-links" href="#upcoming">Upcoming</a></li>
+          </ul>
+        </nav>
+        <div class="header__search">
+          <form id="searchForm">
+            <input type="text" placeholder="Search" />
+          </form>
         </div>
       </div>
+    </header>
+    <section id="movieImgSection" class="movie__img">
+      <picture>
+        <source
+          class="movieImgSection__backdrop"
+          media="(min-width: 768px)"
+          srcset=""
+        />
+        <img class="movieImgSection__poster" src="" alt="" />
+      </picture>
     </section>
-
-    <section id="movieDetailsSection" class="movie-details">
-      <div class="movie__container container">
-        <div class="movie__poster">
-          <img src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg" alt="" />
-        </div>
-        <div class="movie__text">
-          <div class="movie__info">
-            <div class="popularity">7.5</div>
-            <div class="runtime">1h 55m</div>
-            <div class="tag">Trending</div>
-          </div>
-          <div class="movie__description">
-            <h1 class="title">Doctor Strange in the Multiverse of Madness</h1>
-            <p class="overview">
-              Doctor Strange, with the help of mystical allies both old and
-              new, traverses the mind-bending and dangerous alternate
-              realities of the Multiverse to confront a mysterious new
-              adversary.
-            </p>
-          </div>
-          <div class="movie__actions">
-            <button class="button">
-              <img src="./assets/play-icon.svg" alt="" /><span>Play Trailer</span>
-            </button>
-          </div>
-          <article class="movie__categories">
-            <div class="categories-preview__header">
-              <h2 class="categories-preview__title">Categories</h2>
+    <main>
+      <section id="topMovieSection" class="top-movie">
+        <div class="movie__container container">
+          <div class="movie__text">
+            <div class="movie__info">
+              <div class="vote-average">votes...</div>
+              <div class="release_date">date...</div>
+              <div class="tag">Trending</div>
             </div>
-            <article class="categories-preview__list--scroll">
-              <div class="category-container">
-                <h3 class="category-title">Action</h3>
+            <div class="movie__description">
+              <h1 class="title">title...</h1>
+              <p class="overview">overview..</p>
+            </div>
+            <div class="movie__actions">
+              <button class="button">
+                <img src="./assets/play-icon.svg" alt="" /><span
+                  >Play Trailer</span
+                >
+              </button>
+              <button class="button button-secondary detailsTopMovie">
+                <img src="./assets/info-icon.svg" alt="" /><span>Details</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="movieDetailsSection" class="movie-details">
+        <div class="movie__container container">
+          <button class="button buttonBack">
+            <img src="./assets/goback-icon.svg" alt="" /><span>Go back</span>
+          </button>
+          <div class="movie__poster">
+            <img
+              src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg"
+              alt=""
+            />
+          </div>
+          <div class="movie__text">
+            <div class="movie__info">
+              <div class="vote-average">7.5</div>
+              <div class="runtime">1h 55m</div>
+            </div>
+            <div class="movie__description">
+              <h1 class="title">Doctor Strange in the Multiverse of Madness</h1>
+              <p class="overview">
+                Doctor Strange, with the help of mystical allies both old and
+                new, traverses the mind-bending and dangerous alternate
+                realities of the Multiverse to confront a mysterious new
+                adversary.
+              </p>
+            </div>
+            <div class="movie__actions">
+              <button class="button">
+                <img src="./assets/play-icon.svg" alt="" /><span
+                  >Play Trailer</span
+                >
+              </button>
+            </div>
+            <article class="movie__categories">
+              <div class="categories-preview__header">
+                <h2 class="categories-preview__title">Categories</h2>
               </div>
-              <div class="category-container">
-                <h3 class="category-title">Action</h3>
-              </div>
-              <div class="category-container">
-                <h3 class="category-title">Action</h3>
-              </div>
-              <div class="category-container">
-                <h3 class="category-title">Action</h3>
-              </div>
-              <div class="category-container">
-                <h3 class="category-title">Action</h3>
-              </div>
-              <div class="category-container">
-                <h3 class="category-title">Comedy</h3>
-              </div>
-              <div class="category-container">
-                <h3 class="category-title">Fantasy</h3>
-              </div>
+              <article class="categories-preview__list--scroll">
+                <div class="category-container">
+                  <h3 class="category-title">Action</h3>
+                </div>
+                <div class="category-container">
+                  <h3 class="category-title">Action</h3>
+                </div>
+                <div class="category-container">
+                  <h3 class="category-title">Action</h3>
+                </div>
+                <div class="category-container">
+                  <h3 class="category-title">Action</h3>
+                </div>
+                <div class="category-container">
+                  <h3 class="category-title">Action</h3>
+                </div>
+                <div class="category-container">
+                  <h3 class="category-title">Comedy</h3>
+                </div>
+                <div class="category-container">
+                  <h3 class="category-title">Fantasy</h3>
+                </div>
+              </article>
+            </article>
+          </div>
+        </div>
+        <div class="container">
+          <article class="movie__similar-movies">
+            <div class="movies-preview__header">
+              <h2 class="movies-preview__title">Similar Movies</h2>
+              <!-- <button class="button button--small">see all</button> -->
+            </div>
+            <article class="movies-preview__list--scroll">
+              <figure class="movie-container">
+                <img
+                  class="movie-container__img"
+                  src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg"
+                  alt="movieTitle"
+                />
+                <figcaption class="movie-container__title">
+                  Nombre de pelicula
+                </figcaption>
+              </figure>
             </article>
           </article>
         </div>
-      </div>
-      <div class="container">
-        <article class="movie__similar-movies">
+      </section>
+
+      <section
+        id="trendingPreviewSection"
+        class="movies-preview trending-movies section"
+      >
+        <div class="container">
           <div class="movies-preview__header">
-            <h2 class="movies-preview__title">Similar Movies</h2>
-            <button class="button button--small">see all</button>
+            <h2 class="movies-preview__title">Trending</h2>
+            <button class="button button--small" id="trendingPreview-btn">
+              see all
+            </button>
           </div>
           <article class="movies-preview__list--scroll">
-            <figure class="movie-container">
-              <img class="movie-container__img"
-                src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg" alt="movieTitle" />
-              <figcaption class="movie-container__title">
-                Nombre de pelicula
-              </figcaption>
-            </figure>
-          </article>
-        </article>
-      </div>
-    </section>
-
-    <section id="trendingPreviewSection" class="movies-preview trending-movies section">
-      <div class="container">
-        <div class="movies-preview__header">
-          <h2 class="movies-preview__title">Trending</h2>
-          <button class="button button--small" id="trendingPreview-btn">see all</button>
-        </div>
-        <article class="movies-preview__list--scroll">
-          <!-- <figure class="movie-container">
+            <!-- <figure class="movie-container">
             <img class="movie-container__img" src="https://image.tmdb.org/t/p/w154/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg"
               alt="movieTitle" />
             <figcaption class="movie-container__title">
               Nombre de pelicula
             </figcaption>
           </figure> -->
-        </article>
-      </div>
-    </section>
-
-    <section id="categoriesPreviewSection" class="categories-preview section">
-      <div class="container">
-        <div class="categories-preview__header">
-          <h2 class="categories-preview__title">Categories</h2>
+          </article>
         </div>
-        <article class="categories-preview__list--scroll">
-          <!-- <div class="category-container">
+      </section>
+
+      <section id="categoriesPreviewSection" class="categories-preview section">
+        <div class="container">
+          <div class="categories-preview__header">
+            <h2 class="categories-preview__title">Categories</h2>
+          </div>
+          <article class="categories-preview__list--scroll">
+            <!-- <div class="category-container">
             <h3 class="category-title">Action</h3>
           </div> -->
-        </article>
-      </div>
-    </section>
-
-    <section id="popularPreviewSection" class="movies-preview popular-movies section">
-      <div class="container">
-        <div class="movies-preview__header">
-          <h2 class="movies-preview__title">Popular</h2>
-          <button class="button button--small">see all</button>
+          </article>
         </div>
-        <article class="movies-preview__list--scroll">
-          <!-- <figure class="movie-container">
+      </section>
+
+      <section
+        id="popularPreviewSection"
+        class="movies-preview popular-movies section"
+      >
+        <div class="container">
+          <div class="movies-preview__header">
+            <h2 class="movies-preview__title">Popular</h2>
+            <button class="button button--small">see all</button>
+          </div>
+          <article class="movies-preview__list--scroll">
+            <!-- <figure class="movie-container">
             <img class="movie-container__img" src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg"
               alt="movieTitle" />
             <figcaption class="movie-container__title">
@@ -203,18 +234,21 @@
               voluptatem vitae!
             </figcaption>
           </figure> -->
-        </article>
-      </div>
-    </section>
-
-    <section id="upcomingPreviewSection" class="movies-preview upcoming-movies section">
-      <div class="container">
-        <div class="movies-preview__header">
-          <h2 class="movies-preview__title">Upcoming</h2>
-          <button class="button button--small">see all</button>
+          </article>
         </div>
-        <article class="movies-preview__list--scroll">
-          <!-- <figure class="movie-container">
+      </section>
+
+      <section
+        id="upcomingPreviewSection"
+        class="movies-preview upcoming-movies section"
+      >
+        <div class="container">
+          <div class="movies-preview__header">
+            <h2 class="movies-preview__title">Upcoming</h2>
+            <button class="button button--small">see all</button>
+          </div>
+          <article class="movies-preview__list--scroll">
+            <!-- <figure class="movie-container">
             <img class="movie-container__img" src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg"
               alt="movieTitle" />
             <figcaption class="movie-container__title">
@@ -223,43 +257,46 @@
               voluptatem vitae!
             </figcaption>
           </figure> -->
-        </article>
-      </div>
-    </section>
-
-    <section id="genericListSection" class="movies-preview generic-movies section">
-      <div class="container">
-        <div class="movies-preview__header">
-          <h2 class="movies-preview__title">Popular</h2>
-          <button class="button buttonBack">
-            <img src="./assets/goback-icon.svg" alt="" /><span>Go back</span>
-          </button>
+          </article>
         </div>
-        <article class="categories-preview__list--scroll">
-          <div class="category-container">
-            <h3 class="category-title">Action</h3>
+      </section>
+
+      <section
+        id="genericListSection"
+        class="movies-preview generic-movies section"
+      >
+        <div class="container">
+          <div class="movies-preview__header">
+            <h2 class="movies-preview__title">Popular</h2>
+            <button class="button buttonBack">
+              <img src="./assets/goback-icon.svg" alt="" /><span>Go back</span>
+            </button>
           </div>
-          <div class="category-container">
-            <h3 class="category-title">Action</h3>
-          </div>
-          <div class="category-container">
-            <h3 class="category-title">Action</h3>
-          </div>
-          <div class="category-container">
-            <h3 class="category-title">Action</h3>
-          </div>
-          <div class="category-container">
-            <h3 class="category-title">Action</h3>
-          </div>
-          <div class="category-container">
-            <h3 class="category-title">Comedy</h3>
-          </div>
-          <div class="category-container">
-            <h3 class="category-title">Fantasy</h3>
-          </div>
-        </article>
-        <article class="movies-preview__list">
-          <!-- <figure class="movie-container">
+          <article class="categories-preview__list--scroll">
+            <div class="category-container">
+              <h3 class="category-title">Action</h3>
+            </div>
+            <div class="category-container">
+              <h3 class="category-title">Action</h3>
+            </div>
+            <div class="category-container">
+              <h3 class="category-title">Action</h3>
+            </div>
+            <div class="category-container">
+              <h3 class="category-title">Action</h3>
+            </div>
+            <div class="category-container">
+              <h3 class="category-title">Action</h3>
+            </div>
+            <div class="category-container">
+              <h3 class="category-title">Comedy</h3>
+            </div>
+            <div class="category-container">
+              <h3 class="category-title">Fantasy</h3>
+            </div>
+          </article>
+          <article class="movies-preview__list">
+            <!-- <figure class="movie-container">
             <img class="movie-container__img" src="https://image.tmdb.org/t/p/original/6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg"
               alt="movieTitle" />
             <figcaption class="movie-container__title">
@@ -268,22 +305,21 @@
               voluptatem vitae!
             </figcaption>
           </figure> -->
-        </article>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <h4>© All rights reserved | Santiago Lara 2022</h4>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer>
-    <div class="container">
-      <h4>© All rights reserved | Santiago Lara 2022</h4>
-    </div>
-  </footer>
-  
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="./src/secrets.js"></script>
-  <script src="./src/nodes.js"></script>
-  <script src="./src/main.js"></script>
-  <script src="./src/navigation.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./src/secrets.js"></script>
+    <script src="./src/nodes.js"></script>
+    <script src="./src/main.js"></script>
+    <script src="./src/navigation.js"></script>
+  </body>
 </html>

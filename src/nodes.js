@@ -22,6 +22,8 @@ const genericListMoviesPreview    = document.querySelector('#genericListSection 
 
 /* ----- Elements -----*/
 
+const navLinkbtns = document.querySelectorAll('.header__nav .nav-links');
+
 const genericListTitle = document.querySelector('#genericListSection .movies-preview__title');
 const searchForm = document.querySelector('#searchForm');
 const searchFormInput = document.querySelector('#searchForm input');
@@ -29,8 +31,14 @@ const searchFormInput = document.querySelector('#searchForm input');
 const trendingBtn  = document.querySelector('#trendingPreview-btn');
 const buttonGoBack  = document.querySelectorAll('.buttonBack');
 
+const topMovieDetailsTitle = document.querySelector('#topMovieSection .movie__description .title');
+const topMovieDetailsReleaseDate = document.querySelector('#topMovieSection .movie__info .release_date');
+const topMovieDetailsVoteAverage = document.querySelector('#topMovieSection .movie__info .vote-average');
+const topMovieDetailsOverview = document.querySelector('#topMovieSection .movie__description .overview');
+const topMovieDetailsbtn = document.querySelector('#topMovieSection .movie__actions .detailsTopMovie');
+
 const movieDetailsPoster = document.querySelector('#movieDetailsSection .movie__poster img');
-const movieDetailsPopularity = document.querySelector('#movieDetailsSection .movie__info .popularity');
+const movieDetailsVoteAverage = document.querySelector('#movieDetailsSection .movie__info .vote-average');
 const movieDetailsRuntime = document.querySelector('#movieDetailsSection .movie__info .runtime');
 const movieDetailsTag = document.querySelector('#movieDetailsSection .movie__info .tag');
 const movieDetailsTitle = document.querySelector('#movieDetailsSection .movie__description .title');

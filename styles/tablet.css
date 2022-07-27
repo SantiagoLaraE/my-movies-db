@@ -51,7 +51,12 @@
   overflow: hidden;
   width: 100%;
 }
-.generic-movies .button span {
+.movie-details .buttonBack {
+  position: absolute;
+  top: 0;
+  right: 16px;
+}
+.buttonBack span {
   display: block;
 }
 .movies-preview__header {
@@ -60,4 +65,8 @@
   justify-content: space-between;
   margin-bottom: 16px;
   grid-gap: 16px;
+}
+.movie__categories .categories-preview__list--scroll{
+  overflow: initial;
+  flex-wrap: wrap;
 }

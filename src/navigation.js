@@ -1,9 +1,17 @@
 searchForm.addEventListener("keydown", (e) => {
   if (e.keyCode == 13) {
     e.preventDefault();  
-    location.hash = "search=" + searchFormInput.value;
+    console.log(searchFormInput.value);
+    if(searchFormInput.value){
+
+      location.hash = "search=" + searchFormInput.value;
+      toggleSearchSection();
+    }
   }
+  
 });
+
+
 trendingBtn.addEventListener('click', () => location.hash = 'trends');
 buttonGoBack.forEach(btn => btn.addEventListener('click', () => history.back()));
 
@@ -11,6 +19,9 @@ window.addEventListener("DOMContentLoaded", navigator, false);
 window.addEventListener("hashchange", navigator, false);
 
 function navigator() {
+  document.documentElement.scrollTop = 0;
+  // document.body.scrollTop = 0;
+
   location.hash.startsWith("#trends")
     ? trendsPage()
     : location.hash.startsWith("#search=")
@@ -21,7 +32,7 @@ function navigator() {
     ? categoriesPage()
     : homePage();
 
-    window.scrollTo(0,0);
+    
 }
 
 function homePage() {
@@ -37,6 +48,7 @@ function homePage() {
   getMovieCategoriesPreview();
   getPopularMovies();
   getUpcomingMovies();
+  searchFormInput.value = '';
 }
 
 function categoriesPage() {
@@ -49,12 +61,11 @@ function categoriesPage() {
   upcomingPreviewSection.classList.add("inactive");
   genericListSection.classList.remove("inactive");
   genericListCategories.classList.remove("inactive");
-  console.log("CATEGORIES");
 
   const [ , categoryData] = location.hash.split('=');
   const [idCategory, nameCategory] = categoryData.split('&');
 
-  genericListTitle.innerHTML = nameCategory.replace('%20', ' ');
+  genericListTitle.innerHTML = decodeURI(nameCategory);
 
   getMoviesByCategory(idCategory);
 }
@@ -68,6 +79,13 @@ function movieDetailsPage() {
   popularPreviewSection.classList.add("inactive");
   upcomingPreviewSection.classList.add("inactive");
   genericListSection.classList.add("inactive");
+
+  const [, hashData] = location.hash.split('=');
+  const [movieId, ] = hashData.split('&');
+
+  
+
+  getMovieDetailsById(movieId);
 }
 
 function searchPage() {
@@ -80,6 +98,13 @@ function searchPage() {
   upcomingPreviewSection.classList.add("inactive");
   genericListSection.classList.remove("inactive");
   genericListCategories.classList.add("inactive");
+
+  const [ , searchData] = location.hash.split('=');
+
+  genericListTitle.innerHTML = 'Results for: ' + decodeURI(searchData);
+  getMoviesBySearch(searchData);
+  
+
 }
 
 function trendsPage() {
@@ -92,5 +117,6 @@ function trendsPage() {
   upcomingPreviewSection.classList.add("inactive");
   genericListSection.classList.remove("inactive");
   genericListCategories.classList.add("inactive");
-
+  genericListTitle.innerHTML = 'Trending';
+  getTrendingMoviesList();
 }
