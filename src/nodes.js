@@ -8,6 +8,7 @@ const categoriesPreviewSection = document.querySelector('#categoriesPreviewSecti
 const popularPreviewSection = document.querySelector('#popularPreviewSection');
 const upcomingPreviewSection = document.querySelector('#upcomingPreviewSection');
 const genericListSection = document.querySelector('#genericListSection');
+const videoPopup = document.querySelector('#video_popup');
 
 
 /* ----- Lists & Containers ----- */
@@ -16,12 +17,17 @@ const upcomingMoviesPreviewList = document.querySelector('#upcomingPreviewSectio
 const trendingMoviesPreviewList = document.querySelector('#trendingPreviewSection .movies-preview__list--scroll');
 const categoriesPreviewList  = document.querySelector('#categoriesPreviewSection .categories-preview__list--scroll');
 const movieDetailCategoriesList   = document.querySelector('#movieDetailsSection .categories-preview__list--scroll');
+const movieDetailActionsContainer = document.querySelector('#movieDetailsSection .movie__actions');
+const topMovieDetailActionsContainer = document.querySelector('#topMovieSection .movie__actions');
 const relatedMoviesContainer    = document.querySelector('#movieDetailsSection .movies-preview__list--scroll');
 const genericListCategories    = document.querySelector('#genericListSection .categories-preview__list--scroll');
 const genericListMoviesPreview    = document.querySelector('#genericListSection .movies-preview__list');
 
 /* ----- Elements -----*/
-
+const videoPopupiframe = document.querySelector('#video_popup .iframeWrapper');
+const playVideoBtnMovieDetail = document.querySelector('#movieDetailsSection .playVideoBtn');
+const playVideoBtnTopMovieDetail = document.querySelector('#topMovieSection .playVideoBtn');
+const playVideoBtns = document.querySelectorAll('.playVideoBtn');
 const navLinkbtns = document.querySelectorAll('.header__nav .nav-links');
 
 const genericListTitle = document.querySelector('#genericListSection .movies-preview__title');

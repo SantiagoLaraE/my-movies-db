@@ -8,6 +8,8 @@ const api = axios.create({
   },
 });
 
+/* API functions*/
+
 async function getMoviesBySearch(query) {
   const encoded = encodeURI(query);
   const { data } = await api("/search/movie", {
@@ -22,30 +24,9 @@ async function getMoviesBySearch(query) {
 async function getTrendingMoviesPreview() {
   const { data } = await api("/trending/movie/day");
   const [topMovie, ...movies] = data.results;
-  console.log(topMovie.id);
+
   createTopMoviePreview(topMovie);
   createMovies(movies, trendingMoviesPreviewList);
-  
-}
-
-async function hola(){
-    const {data} = await api(`/movie/725201/videos`);
-    console.log(data.results)
-}
-hola();
-function createTopMoviePreview(movie) {
-  movieImgBackdrop.srcset =
-    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/" +
-    movie.backdrop_path;
-  movieImgPoster.src = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
-
-  topMovieDetailsTitle.textContent = movie.title;
-  topMovieDetailsOverview.textContent = movie.overview;
-  topMovieDetailsReleaseDate.textContent = movie.release_date;
-  topMovieDetailsVoteAverage.textContent = movie.vote_average;
-  topMovieDetailsbtn.addEventListener('click', () => {
-    location.hash = `movie=${movie.id}&${movie.title}`;
-  })
 }
 
 async function getTrendingMoviesList() {
@@ -98,6 +79,16 @@ async function getSimilarMovierById(id) {
   createMovies(similarMovies, relatedMoviesContainer);
 }
 
+async function getVideoByMovie(id) {
+  const { data } = await api(`/movie/${id}/videos`);
+
+  const videos = data.results;
+  const [{key: keyVideo}, ] = videos.filter(({type, site}) => type == "Trailer" && site == "YouTube");
+
+  createVideoPopup(keyVideo);
+}
+
+/* Navbar function*/
 function toggleMenuNav() {
   if (headerNav.classList.contains("open")) {
     headerNav.classList.remove("open");
@@ -121,11 +112,13 @@ function toggleSearchSection() {
 
 navSearchToggleBtn.addEventListener("click", toggleSearchSection);
 
-navLinkbtns.forEach(link => {
-    link.addEventListener('click', ()=>{
-        toggleMenuNav();
-    })
-})
+navLinkbtns.forEach((link) => {
+  link.addEventListener("click", () => {
+    toggleMenuNav();
+  });
+});
+
+/* Create functions*/
 
 function createMovies(moviesData, renderSection) {
   const fragment = new DocumentFragment();
@@ -198,4 +191,55 @@ function createMovieDetails(movie) {
 
   movieDetailsTitle.textContent = movie.title;
   movieDetailsOverview.textContent = movie.overview;
+  playVideoBtnMovieDetail.setAttribute("data-id", movie.id);
 }
+
+function createTopMoviePreview(movie) {
+  movieImgBackdrop.srcset =
+    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/" +
+    movie.backdrop_path;
+  movieImgPoster.src = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+
+  topMovieDetailsTitle.textContent = movie.title;
+  topMovieDetailsOverview.textContent = movie.overview;
+  topMovieDetailsReleaseDate.textContent = movie.release_date;
+  topMovieDetailsVoteAverage.textContent = movie.vote_average;
+  topMovieDetailsbtn.addEventListener("click", () => {
+    location.hash = `movie=${movie.id}&${movie.title}`;
+  });
+
+  playVideoBtnTopMovieDetail.setAttribute("data-id", movie.id);
+}
+
+function createVideoPopup(key) {
+  const iframe = `<iframe
+  src="https://www.youtube.com/embed/${key}"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>;`;
+
+  videoPopupiframe.innerHTML = iframe;
+}
+
+/* Video Popup*/
+
+playVideoBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (btn.hasAttribute("data-id")) {
+      const movieId = btn.getAttribute("data-id");
+      getVideoByMovie(movieId);
+      videoPopup.classList.remove("inactive");
+    }
+  });
+});
+
+function closeVideoPopup() {
+  videoPopupiframe.innerHTML = "";
+  videoPopup.classList.add("inactive");
+}
+
+videoPopup.addEventListener("click", () => {
+  closeVideoPopup();
+});

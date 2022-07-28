@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This is a my db where you can find a lots of movies">
     <title>My Movies DB</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,6 +23,7 @@
       href="./styles/desktop.css"
       media="(min-width: 1024px)"
     />
+    <link rel="shortcut icon" href="./assets/faviconMyMoviesDB.svg">
   </head>
 
   <body>
@@ -82,7 +84,7 @@
               <p class="overview">overview..</p>
             </div>
             <div class="movie__actions">
-              <button class="button">
+              <button class="button playVideoBtn">
                 <img src="./assets/play-icon.svg" alt="" /><span
                   >Play Trailer</span
                 >
@@ -121,7 +123,7 @@
               </p>
             </div>
             <div class="movie__actions">
-              <button class="button">
+              <button class="button playVideoBtn">
                 <img src="./assets/play-icon.svg" alt="" /><span
                   >Play Trailer</span
                 >
@@ -308,11 +310,24 @@
           </article>
         </div>
       </section>
+      <section id="video_popup" class="inactive">
+        <div class="video_popup__container container">
+          <div class="iframeWrapper">
+            <!-- <iframe
+            src="https://www.youtube.com/embed/BmllggGO4pM"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe> -->
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
       <div class="container">
-        <h4>© All rights reserved | Santiago Lara 2022</h4>
+        <h6>© All rights reserved | Santiago Lara 2022</h6>
       </div>
     </footer>
 
