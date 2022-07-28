@@ -35,6 +35,8 @@ const searchForm = document.querySelector('#searchForm');
 const searchFormInput = document.querySelector('#searchForm input');
 
 const trendingBtn  = document.querySelector('#trendingPreview-btn');
+const popularBtn  = document.querySelector('#popularPreview-btn');
+const upcomingBtn  = document.querySelector('#upcomingPreview-btn');
 const buttonGoBack  = document.querySelectorAll('.buttonBack');
 
 const topMovieDetailsTitle = document.querySelector('#topMovieSection .movie__description .title');

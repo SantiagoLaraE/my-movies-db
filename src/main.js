@@ -34,6 +34,16 @@ async function getTrendingMoviesList() {
 
   createMovies(data.results, genericListMoviesPreview);
 }
+async function getPopularMoviesList() {
+  const { data } = await api("/movie/popular");
+
+  createMovies(data.results, genericListMoviesPreview);
+}
+async function getUpcomingMoviesList() {
+  const { data } = await api("/movie/upcoming");
+
+  createMovies(data.results, genericListMoviesPreview);
+}
 
 async function getMovieCategoriesPreview() {
   const { data } = await api("/genre/movie/list");

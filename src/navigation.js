@@ -13,6 +13,9 @@ searchForm.addEventListener("keydown", (e) => {
 
 
 trendingBtn.addEventListener('click', () => location.hash = 'trends');
+popularBtn.addEventListener('click', () => location.hash = 'popular');
+upcomingBtn.addEventListener('click', () => location.hash = 'upcoming');
+
 buttonGoBack.forEach(btn => btn.addEventListener('click', () => history.back()));
 
 window.addEventListener("DOMContentLoaded", navigator, false);
@@ -24,6 +27,10 @@ function navigator() {
 
   location.hash.startsWith("#trends")
     ? trendsPage()
+    : location.hash.startsWith("#popular")
+    ? popularPage()
+    : location.hash.startsWith("#upcoming")
+    ? upcomingPage()
     : location.hash.startsWith("#search=")
     ? searchPage()
     : location.hash.startsWith("#movie=")
@@ -68,6 +75,7 @@ function categoriesPage() {
   genericListTitle.innerHTML = decodeURI(nameCategory);
 
   getMoviesByCategory(idCategory);
+  getMovieCategoriesPreview()
 }
 
 function movieDetailsPage() {
@@ -108,6 +116,20 @@ function searchPage() {
 }
 
 function trendsPage() {
+  homeCategoriesView('Trending')
+  getTrendingMoviesList();
+}
+function popularPage() {
+  homeCategoriesView('Popular')
+  getPopularMoviesList();
+}
+function upcomingPage() {
+  homeCategoriesView('Upcoming')
+  getUpcomingMoviesList();
+}
+
+
+function homeCategoriesView(categoryName){
   movieImgSection.classList.add("inactive");
   topMovieSection.classList.add("inactive");
   movieDetailsSection.classList.add("inactive");
@@ -117,6 +139,5 @@ function trendsPage() {
   upcomingPreviewSection.classList.add("inactive");
   genericListSection.classList.remove("inactive");
   genericListCategories.classList.add("inactive");
-  genericListTitle.innerHTML = 'Trending';
-  getTrendingMoviesList();
+  genericListTitle.innerHTML = categoryName;
 }
