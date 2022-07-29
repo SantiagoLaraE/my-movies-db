@@ -69,3 +69,6 @@ main {
   overflow-x: initial;
   gap: 8px;
 }
+.loading-spinner__container{
+  max-width: 400px;
+}
