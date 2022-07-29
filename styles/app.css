@@ -543,3 +543,104 @@ footer h6{
     transform: translateY(0px);
   }
 }
+
+/*LOADER*/
+
+.movie-loading--img, .movie-poster-loading--img{
+  width: 100%;
+  min-width: 136px;
+  padding-top: 144%;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+
+}
+.category-loading{
+  width: 100px;
+  padding-top: 38px;
+  height: auto;
+  background-color: rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.movie-poster-loading--img{
+  min-width:342px;
+}
+
+.movie-loading--text{
+  margin-top: 8px;
+  width: 100%;
+  padding-top: 16px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-loading--img::after, .movie-loading--text::after, .movieImgSection__poster--loading::after, .movie-poster-loading--img::after, .category-loading::after{
+  background-color: rgba(255,255,255,0.05);
+  content: "";
+  width: 10%;
+  height: 140%;
+  display: block;
+  position: absolute;
+  top: -20%;
+  left:0;
+  filter: blur(24px);
+  transform-origin: top;
+}
+.category-loading::after{
+  width: 25%;
+}
+
+.movie-loading--img::after, .movie-loading--text::after, .movieImgSection__poster--loading::after, .movie-poster-loading--img::after, .category-loading::after{
+  animation: movieLoadingImg 2s ease-in-out infinite;
+}
+.movie-loading--text::after{
+  animation: movieLoadingImg 2s ease-in-out infinite 1s;
+}
+.movieImgSection__poster--loading::after{
+  animation-duration: 4s;
+}
+@keyframes movieLoadingImg {
+  0%{left:-40%; opacity: 0;}
+  50%{opacity: 1;}
+  100%{left:130%; opacity: 0;}
+}
+
+.movieImgSection__poster--loading{
+  width: 100%;
+  background-color: rgba(255,255,255,0.1);
+  padding-top: 140%;
+  position: relative;
+  overflow: hidden;
+}
+.loading-spinner__container{
+  height: 250px;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loading-spinner{
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border-radius: 50%;
+  border-top: 6px solid red;
+  border-bottom: 6px solid rgba(255,255,255,0.15);
+  border-left: 6px solid rgba(255,255,255,0.15);
+  border-right: 6px solid rgba(255,255,255,0.15);
+  animation: spinnerAnimation 1.8s linear infinite;
+}
+
+@keyframes spinnerAnimation {
+  0%{ transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+}

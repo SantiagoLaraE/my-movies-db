@@ -7,7 +7,7 @@ const api = axios.create({
     api_key: API_KEY,
   },
 });
-
+const hola = new Promise((resolve, reject) => {});
 /* API functions*/
 
 async function getMoviesBySearch(query) {
@@ -93,7 +93,9 @@ async function getVideoByMovie(id) {
   const { data } = await api(`/movie/${id}/videos`);
 
   const videos = data.results;
-  const [{key: keyVideo}, ] = videos.filter(({type, site}) => type == "Trailer" && site == "YouTube");
+  const [{ key: keyVideo }] = videos.filter(
+    ({ type, site }) => type == "Trailer" && site == "YouTube"
+  );
 
   createVideoPopup(keyVideo);
 }
@@ -186,39 +188,154 @@ function createCategories(categoriesData, renderSection) {
 }
 
 function createMovieDetails(movie) {
-  movieDetailsPoster.src =
-    "https://image.tmdb.org/t/p/w342/" + movie.poster_path;
-  movieImgBackdrop.srcset =
-    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/" +
-    movie.backdrop_path;
-  movieImgPoster.src = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
 
-  movieDetailsVoteAverage.textContent = movie.vote_average;
+  movieDetailsPosterContainer.innerHTML = `<img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}" alt="${movie.title}" />`;
+  movieImgSection.innerHTML = `<picture>
+  <source class="movieImgSection__backdrop" media="(min-width: 768px)" srcset="https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie.backdrop_path}" />
+  <img class="movieImgSection__poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}" />
+  </picture>`;
+  
 
+  /*Movie Info*/
+  const movieInfoContainer = document.createElement("div");
+  movieInfoContainer.classList.add("movie__info");
+
+  const voteAverage = document.createElement("div");
+  voteAverage.classList.add("vote-average");
+  voteAverage.innerHTML = movie.vote_average;
+
+  const runtime = document.createElement("div");
+  runtime.classList.add("runtime");
   const hours = Math.floor(movie.runtime / 60);
   const minutes = movie.runtime % 60;
-  movieDetailsRuntime.textContent = `${hours}h ${minutes}m`;
 
-  movieDetailsTitle.textContent = movie.title;
-  movieDetailsOverview.textContent = movie.overview;
-  playVideoBtnMovieDetail.setAttribute("data-id", movie.id);
+  runtime.innerHTML = `${hours}h ${minutes}m`;
+
+
+  movieInfoContainer.appendChild(voteAverage);
+  movieInfoContainer.appendChild(runtime);
+
+  /*Movie Description*/
+
+  const movieDescriptionContainer = document.createElement("div");
+  movieDescriptionContainer.classList.add("movie__description");
+
+  const movieTitle = document.createElement("h1");
+  movieTitle.classList.add("title");
+  movieTitle.innerHTML = movie.title;
+
+  const movieOverview = document.createElement("p");
+  movieOverview.classList.add("overview");
+  movieOverview.innerHTML = movie.overview;
+
+  movieDescriptionContainer.appendChild(movieTitle);
+  movieDescriptionContainer.appendChild(movieOverview);
+
+
+  /*Movie Actions*/
+
+  const movieActionsContainer = document.createElement("div");
+  movieActionsContainer.classList.add("movie__actions");
+
+  const playVideoBtn = document.createElement("button");
+  playVideoBtn.classList.add("button");
+  playVideoBtn.innerHTML = `<img src="./assets/play-icon.svg" alt="" /><span>Play Trailer</span>`;
+  
+  playVideoBtn.addEventListener("click", () => {
+
+      getVideoByMovie(movie.id);
+      videoPopup.classList.remove("inactive");
+
+  });
+
+  movieActionsContainer.appendChild(playVideoBtn);
+
+
+  /*Append sections*/
+
+  movieDetailTextDescription.innerHTML = '';
+  movieDetailTextDescription.appendChild(movieInfoContainer);
+  movieDetailTextDescription.appendChild(movieDescriptionContainer);
+  movieDetailTextDescription.appendChild(movieActionsContainer);
+  
 }
 
 function createTopMoviePreview(movie) {
-  movieImgBackdrop.srcset =
-    "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/" +
-    movie.backdrop_path;
-  movieImgPoster.src = "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+  movieImgSection.innerHTML = `<picture>
+  <source class="movieImgSection__backdrop" media="(min-width: 768px)" srcset="https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie.backdrop_path}" />
+  <img class="movieImgSection__poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="" />
+  </picture>`;
 
-  topMovieDetailsTitle.textContent = movie.title;
-  topMovieDetailsOverview.textContent = movie.overview;
-  topMovieDetailsReleaseDate.textContent = movie.release_date;
-  topMovieDetailsVoteAverage.textContent = movie.vote_average;
-  topMovieDetailsbtn.addEventListener("click", () => {
+  /*Movie Info*/
+  const movieInfoContainer = document.createElement("div");
+  movieInfoContainer.classList.add("movie__info");
+
+  const voteAverage = document.createElement("div");
+  voteAverage.classList.add("vote-average");
+  voteAverage.innerHTML = movie.vote_average;
+
+  const releaseDate = document.createElement("div");
+  releaseDate.classList.add("release_date");
+  releaseDate.innerHTML = movie.release_date;
+
+  const tag = document.createElement("div");
+  tag.classList.add("tag");
+  tag.innerHTML = "Trending";
+
+  movieInfoContainer.appendChild(voteAverage);
+  movieInfoContainer.appendChild(releaseDate);
+  movieInfoContainer.appendChild(tag);
+
+  /*Movie Description*/
+
+  const movieDescriptionContainer = document.createElement("div");
+  movieDescriptionContainer.classList.add("movie__description");
+
+  const movieTitle = document.createElement("h1");
+  movieTitle.classList.add("title");
+  movieTitle.innerHTML = movie.title;
+
+  const movieOverview = document.createElement("p");
+  movieOverview.classList.add("overview");
+  movieOverview.innerHTML = movie.overview;
+
+  movieDescriptionContainer.appendChild(movieTitle);
+  movieDescriptionContainer.appendChild(movieOverview);
+
+  /*Movie Actions*/
+
+  const movieActionsContainer = document.createElement("div");
+  movieActionsContainer.classList.add("movie__actions");
+
+  const playVideoBtn = document.createElement("button");
+  playVideoBtn.classList.add("button");
+  playVideoBtn.innerHTML = `<img src="./assets/play-icon.svg" alt="" /><span>Play Trailer</span>`;
+  
+  playVideoBtn.addEventListener("click", () => {
+
+      getVideoByMovie(movie.id);
+      videoPopup.classList.remove("inactive");
+
+  });
+
+  const detailsMovieBtn = document.createElement("button");
+  detailsMovieBtn.classList.add("button");
+  detailsMovieBtn.classList.add("button-secondary");
+  detailsMovieBtn.innerHTML = `<img src="./assets/info-icon.svg" alt="" /><span>Details</span>`;
+
+  detailsMovieBtn.addEventListener("click", () => {
     location.hash = `movie=${movie.id}&${movie.title}`;
   });
 
-  playVideoBtnTopMovieDetail.setAttribute("data-id", movie.id);
+  movieActionsContainer.appendChild(playVideoBtn);
+  movieActionsContainer.appendChild(detailsMovieBtn);
+
+  /* Append Sections*/
+  topMovieDetailTextDescription.innerHTML = "";
+  topMovieDetailTextDescription.appendChild(movieInfoContainer);
+  topMovieDetailTextDescription.appendChild(movieDescriptionContainer);
+  topMovieDetailTextDescription.appendChild(movieActionsContainer);
+
 }
 
 function createVideoPopup(key) {
@@ -235,15 +352,6 @@ function createVideoPopup(key) {
 
 /* Video Popup*/
 
-playVideoBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (btn.hasAttribute("data-id")) {
-      const movieId = btn.getAttribute("data-id");
-      getVideoByMovie(movieId);
-      videoPopup.classList.remove("inactive");
-    }
-  });
-});
 
 function closeVideoPopup() {
   videoPopupiframe.innerHTML = "";

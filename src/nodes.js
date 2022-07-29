@@ -39,13 +39,11 @@ const popularBtn  = document.querySelector('#popularPreview-btn');
 const upcomingBtn  = document.querySelector('#upcomingPreview-btn');
 const buttonGoBack  = document.querySelectorAll('.buttonBack');
 
-const topMovieDetailsTitle = document.querySelector('#topMovieSection .movie__description .title');
-const topMovieDetailsReleaseDate = document.querySelector('#topMovieSection .movie__info .release_date');
-const topMovieDetailsVoteAverage = document.querySelector('#topMovieSection .movie__info .vote-average');
-const topMovieDetailsOverview = document.querySelector('#topMovieSection .movie__description .overview');
-const topMovieDetailsbtn = document.querySelector('#topMovieSection .movie__actions .detailsTopMovie');
+const topMovieDetailTextDescription = document.querySelector('#topMovieSection .movie__text .movie__text__details');
+const movieDetailTextDescription = document.querySelector('#movieDetailsSection .movie__text .movie__text__details');
 
 const movieDetailsPoster = document.querySelector('#movieDetailsSection .movie__poster img');
+const movieDetailsPosterContainer = document.querySelector('#movieDetailsSection .movie__poster');
 const movieDetailsVoteAverage = document.querySelector('#movieDetailsSection .movie__info .vote-average');
 const movieDetailsRuntime = document.querySelector('#movieDetailsSection .movie__info .runtime');
 const movieDetailsTag = document.querySelector('#movieDetailsSection .movie__info .tag');
