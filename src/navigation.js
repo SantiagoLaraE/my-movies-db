@@ -16,7 +16,9 @@ trendingBtn.addEventListener('click', () => location.hash = 'trends');
 popularBtn.addEventListener('click', () => location.hash = 'popular');
 upcomingBtn.addEventListener('click', () => location.hash = 'upcoming');
 
-buttonGoBack.forEach(btn => btn.addEventListener('click', () => history.back()));
+buttonGoBack.forEach(btn => btn.addEventListener('click', () => {
+  (document.domain != location.origin) ? location.hash = '' : history.back();
+}));
 
 window.addEventListener("DOMContentLoaded", navigator, false);
 window.addEventListener("hashchange", navigator, false);
