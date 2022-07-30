@@ -144,10 +144,15 @@ function createMovies(moviesData, renderSection) {
     const img = document.createElement("img");
     img.classList.add("movie-container__img");
     img.setAttribute(
-      "src",
+      "data-image",
       `https://image.tmdb.org/t/p/w154${movie.poster_path}`
     );
     img.setAttribute("alt", `${movie.title}`);
+    img.setAttribute("src", '../assets/MoviePlaceholder.png');
+    img.setAttribute("width", `200`);
+    img.setAttribute("height", `300`);
+
+    lazyLoad.observe(img);
 
     const figcaption = document.createElement("figcaption");
     figcaption.classList.add("movie-container__title");
@@ -161,6 +166,8 @@ function createMovies(moviesData, renderSection) {
   });
   renderSection.innerHTML = "";
   renderSection.appendChild(fragment);
+
+
 }
 
 function createCategories(categoriesData, renderSection) {
@@ -188,13 +195,11 @@ function createCategories(categoriesData, renderSection) {
 }
 
 function createMovieDetails(movie) {
-
   movieDetailsPosterContainer.innerHTML = `<img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}" alt="${movie.title}" />`;
   movieImgSection.innerHTML = `<picture>
   <source class="movieImgSection__backdrop" media="(min-width: 768px)" srcset="https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie.backdrop_path}" />
   <img class="movieImgSection__poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}" />
   </picture>`;
-  
 
   /*Movie Info*/
   const movieInfoContainer = document.createElement("div");
@@ -210,7 +215,6 @@ function createMovieDetails(movie) {
   const minutes = movie.runtime % 60;
 
   runtime.innerHTML = `${hours}h ${minutes}m`;
-
 
   movieInfoContainer.appendChild(voteAverage);
   movieInfoContainer.appendChild(runtime);
@@ -231,7 +235,6 @@ function createMovieDetails(movie) {
   movieDescriptionContainer.appendChild(movieTitle);
   movieDescriptionContainer.appendChild(movieOverview);
 
-
   /*Movie Actions*/
 
   const movieActionsContainer = document.createElement("div");
@@ -240,24 +243,20 @@ function createMovieDetails(movie) {
   const playVideoBtn = document.createElement("button");
   playVideoBtn.classList.add("button");
   playVideoBtn.innerHTML = `<img src="./assets/play-icon.svg" alt="" /><span>Play Trailer</span>`;
-  
+
   playVideoBtn.addEventListener("click", () => {
-
-      getVideoByMovie(movie.id);
-      videoPopup.classList.remove("inactive");
-
+    getVideoByMovie(movie.id);
+    videoPopup.classList.remove("inactive");
   });
 
   movieActionsContainer.appendChild(playVideoBtn);
 
-
   /*Append sections*/
 
-  movieDetailTextDescription.innerHTML = '';
+  movieDetailTextDescription.innerHTML = "";
   movieDetailTextDescription.appendChild(movieInfoContainer);
   movieDetailTextDescription.appendChild(movieDescriptionContainer);
   movieDetailTextDescription.appendChild(movieActionsContainer);
-  
 }
 
 function createTopMoviePreview(movie) {
@@ -310,12 +309,10 @@ function createTopMoviePreview(movie) {
   const playVideoBtn = document.createElement("button");
   playVideoBtn.classList.add("button");
   playVideoBtn.innerHTML = `<img src="./assets/play-icon.svg" alt="" /><span>Play Trailer</span>`;
-  
+
   playVideoBtn.addEventListener("click", () => {
-
-      getVideoByMovie(movie.id);
-      videoPopup.classList.remove("inactive");
-
+    getVideoByMovie(movie.id);
+    videoPopup.classList.remove("inactive");
   });
 
   const detailsMovieBtn = document.createElement("button");
@@ -335,7 +332,6 @@ function createTopMoviePreview(movie) {
   topMovieDetailTextDescription.appendChild(movieInfoContainer);
   topMovieDetailTextDescription.appendChild(movieDescriptionContainer);
   topMovieDetailTextDescription.appendChild(movieActionsContainer);
-
 }
 
 function createVideoPopup(key) {
@@ -352,7 +348,6 @@ function createVideoPopup(key) {
 
 /* Video Popup*/
 
-
 function closeVideoPopup() {
   videoPopupiframe.innerHTML = "";
   videoPopup.classList.add("inactive");
@@ -361,3 +356,22 @@ function closeVideoPopup() {
 videoPopup.addEventListener("click", () => {
   closeVideoPopup();
 });
+
+/*LayLoad*/
+
+
+const lazyLoad = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const img = entry.target;
+      const imgURL = img.getAttribute('data-image');
+      img.src = imgURL;
+      img.classList.add('movie-container__img--loaded');
+    }
+  })
+}, {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.2,
+});
+

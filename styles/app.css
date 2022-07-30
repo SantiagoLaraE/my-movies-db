@@ -428,7 +428,22 @@ section{
 }
 
 .movie-container__img {
-  width: 100%;
+  aspect-ratio: 2 / 3; 
+	height: auto;
+	object-fit: cover;
+	vertical-align: top;
+	width: 100%;
+  margin-bottom: 8px;
+}
+
+.movie-container__img--loaded{
+  /* opacity: 1; */
+  animation: imgLoaded 1s ease-in-out;
+}
+
+@keyframes imgLoaded {
+  0%{opacity: 0;}
+  100%{opacity: 1;}
 }
 
 .movie-container__title {
