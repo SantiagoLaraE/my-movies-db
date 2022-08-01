@@ -7,7 +7,7 @@ const api = axios.create({
     api_key: API_KEY,
   },
 });
-const hola = new Promise((resolve, reject) => {});
+
 /* API functions*/
 
 async function getMoviesBySearch(query) {
@@ -32,7 +32,52 @@ async function getTrendingMoviesPreview() {
 async function getTrendingMoviesList() {
   const { data } = await api("/trending/movie/week");
 
+  console.log(data);
+
   createMovies(data.results, genericListMoviesPreview);
+
+  const btnLoadMore = document.createElement('button');
+  btnLoadMore.classList.add('button');
+  btnLoadMore.innerText = "Cargar Más";
+
+  btnLoadMore.addEventListener('click', (e) => {
+    e.srcElement.remove();
+    getPaginatedTrendingMoviesList();
+  });
+
+  genericListMoviesPreview.appendChild(btnLoadMore);
+}
+
+let page = 1;
+
+async function getPaginatedTrendingMoviesList() {
+  const {scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 32);
+
+  if(scrollIsBottom){
+    
+  }
+
+  page++;
+  const { data } = await api("/trending/movie/week" ,{
+    params: {
+      page,
+    }
+  });
+
+  createMovies(data.results, genericListMoviesPreview, {cleanSection: false});
+
+  const btnLoadMore = document.createElement('button');
+  btnLoadMore.classList.add('button');
+  btnLoadMore.innerText = "Cargar Más";
+
+  btnLoadMore.addEventListener('click', (e) => {
+    e.srcElement.remove();
+    getPaginatedTrendingMoviesList();
+  });
+
+  genericListMoviesPreview.appendChild(btnLoadMore);
 }
 async function getPopularMoviesList() {
   const { data } = await api("/movie/popular");
@@ -132,7 +177,10 @@ navLinkbtns.forEach((link) => {
 
 /* Create functions*/
 
-function createMovies(moviesData, renderSection) {
+function createMovies(moviesData, renderSection, {cleanSection = true} = {}) {
+
+  console.log(cleanSection);
+
   const fragment = new DocumentFragment();
   moviesData.forEach((movie) => {
     const figure = document.createElement("figure");
@@ -148,9 +196,17 @@ function createMovies(moviesData, renderSection) {
       `https://image.tmdb.org/t/p/w154${movie.poster_path}`
     );
     img.setAttribute("alt", `${movie.title}`);
-    img.setAttribute("src", '../assets/MoviePlaceholder.png');
     img.setAttribute("width", `200`);
     img.setAttribute("height", `300`);
+
+    if (movie.poster_path === null) {
+      img.setAttribute(
+        "data-image",
+        `https://via.placeholder.com/200x300/191919/ffffff?text=${encodeURI(movie.title)}`
+      );
+    }
+
+
 
     lazyLoad.observe(img);
 
@@ -164,10 +220,12 @@ function createMovies(moviesData, renderSection) {
 
     fragment.appendChild(figure);
   });
-  renderSection.innerHTML = "";
+  
+  if (cleanSection) {
+    renderSection.innerHTML = "";
+  }
+
   renderSection.appendChild(fragment);
-
-
 }
 
 function createCategories(categoriesData, renderSection) {
@@ -359,19 +417,20 @@ videoPopup.addEventListener("click", () => {
 
 /*LayLoad*/
 
-
-const lazyLoad = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      const img = entry.target;
-      const imgURL = img.getAttribute('data-image');
-      img.src = imgURL;
-      img.classList.add('movie-container__img--loaded');
-    }
-  })
-}, {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.2,
-});
-
+const lazyLoad = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const imgURL = img.getAttribute("data-image");
+        img.src = imgURL;
+        img.classList.add("movie-container__img--loaded");
+      }
+    });
+  },
+  {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.2,
+  }
+);

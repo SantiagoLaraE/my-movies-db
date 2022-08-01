@@ -1,7 +1,7 @@
 searchForm.addEventListener("keydown", (e) => {
   if (e.keyCode == 13) {
     e.preventDefault();  
-    console.log(searchFormInput.value);
+
     if(searchFormInput.value){
 
       location.hash = "search=" + searchFormInput.value;
