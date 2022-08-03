@@ -105,6 +105,3 @@ dist
 
 # Node Modules
 /node_modules
-
-# Secrets.js (API KEY)
-src/secrets.js

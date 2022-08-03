@@ -1,3 +1,4 @@
+//data
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   headers: {
@@ -7,6 +8,32 @@ const api = axios.create({
     api_key: API_KEY,
   },
 });
+function likedMovieList(){
+  const item = localStorage.getItem('liked-movies');
+  let movies;
+  if(item){
+    movies = JSON.parse(item);
+    
+  }else{
+    movies = {};
+  }
+  return movies;
+}
+function likeMovie(movie) {
+  const likedMovies = likedMovieList();
+
+  if (likedMovies[movie.id]) {
+    delete likedMovies[movie.id]
+  }else{
+    likedMovies[movie.id] = movie;
+  }
+  localStorage.setItem('liked-movies', JSON.stringify(likedMovies));
+
+  if(location.hash == ''){
+    homePage();
+  }
+
+}
 
 /* API functions*/
 
@@ -70,10 +97,17 @@ async function getUpcomingMoviesList() {
   createMovies(data.results, genericListMoviesPreview);
 }
 
+function getLikedMoviesList() {
+  const likedMovies = likedMovieList();
+  const moviesArray = Object.values(likedMovies);
+  (moviesArray.length == 0) ? likedMoviesPreviewList.innerHTML = `<p style="width:100%; text-align:center;padding:10.8rem 3.2rem;">You don't have liked movies</p>` :
+  createMovies(moviesArray, likedMoviesPreviewList);
+}
+
 async function getInfiniteMoviesList() {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  const scrollIsBottom = (scrollTop + clientHeight >= scrollHeight - 15);
+  const scrollIsBottom = (scrollTop + clientHeight >= scrollHeight - 200);
 
   const pageIsNotMax = (page < maxPage);
 
@@ -132,6 +166,7 @@ async function getPopularMovies() {
 
   createMovies(data.results, popularMoviesPreviewList);
 }
+
 async function getUpcomingMovies() {
   const { data } = await api("/movie/upcoming");
 
@@ -203,9 +238,7 @@ function createMovies(moviesData, renderSection, { cleanSection = true } = {}) {
   moviesData.forEach((movie) => {
     const figure = document.createElement("figure");
     figure.classList.add("movie-container");
-    figure.addEventListener("click", () => {
-      location.hash = `movie=${movie.id}&${movie.title}`;
-    });
+    
 
     const img = document.createElement("img");
     img.classList.add("movie-container__img");
@@ -225,6 +258,9 @@ function createMovies(moviesData, renderSection, { cleanSection = true } = {}) {
         )}`
       );
     }
+    img.addEventListener("click", () => {
+      location.hash = `movie=${movie.id}&${movie.title}`;
+    });
 
     lazyLoad.observe(img);
 
@@ -233,8 +269,23 @@ function createMovies(moviesData, renderSection, { cleanSection = true } = {}) {
     const figcaptionText = document.createTextNode(movie.title);
     figcaption.appendChild(figcaptionText);
 
+    const btn = document.createElement('button');
+    btn.classList.add('movieBtnLike', 'button-secondary', 'button', 'button--small');
+    const likedMovies = likedMovieList();
+
+    if (likedMovies[movie.id]) {
+      btn.classList.add('movieBtnLike--liked');
+    }
+
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('movieBtnLike--liked');
+
+      likeMovie(movie);
+    })
+
     figure.appendChild(img);
     figure.appendChild(figcaption);
+    figure.appendChild(btn);
 
     fragment.appendChild(figure);
   });

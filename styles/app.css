@@ -71,9 +71,7 @@ p {
   display: none;
 }
 
-.button:hover,
-.button:active,
-.button:focus {
+.button:hover{
   background-color: #222;
   color: var(--white);
 }
@@ -409,6 +407,7 @@ section{
   animation-name: movieAnimation;
   animation-timing-function: ease;
   animation-duration: 1s;
+  position: relative;
 }
 @keyframes movieAnimation {
   from{opacity: 0; transform: translateY(50px);}
@@ -441,6 +440,29 @@ section{
   /* opacity: 1; */
   animation: imgLoaded 1s ease-in-out;
 }
+.movieBtnLike{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.movieBtnLike::before{
+  content: '🤍';
+  font-size: 1.2rem;
+}
+.movieBtnLike:hover::before{
+  content: '🤍';
+}
+
+.movieBtnLike--liked, .movieBtnLike:hover{
+  background-color: var(--red-color);
+}
+
+.movieBtnLike--liked::before{
+content: '🤍';
+font-size: 1.4rem;
+}
+
+
 
 @keyframes imgLoaded {
   0%{opacity: 0;}
