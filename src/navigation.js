@@ -1,3 +1,14 @@
+let page = 1;
+let maxPage;
+let infiniteScroll;
+let endpointInfiniteScroll;
+let infiniteScrollParams = {
+  params: {
+    page: 1,
+  },
+};
+
+
 searchForm.addEventListener("keydown", (e) => {
   if (e.keyCode == 13) {
     e.preventDefault();  
@@ -23,9 +34,26 @@ buttonGoBack.forEach(btn => btn.addEventListener('click', () => {
 window.addEventListener("DOMContentLoaded", navigator, false);
 window.addEventListener("hashchange", navigator, false);
 
+
 function navigator() {
   document.documentElement.scrollTop = 0;
   // document.body.scrollTop = 0;
+
+
+  if(infiniteScroll){
+    window.removeEventListener('scroll', infiniteScroll, {passive: false});
+    infiniteScroll = undefined;
+    page = 1;
+    maxPage = 0;
+    endpointInfiniteScroll = undefined;
+    infiniteScrollParams = {
+      params: {
+        page: 1,
+      },
+    };
+  }
+  console.log('page: ' + infiniteScrollParams.params);
+
 
   location.hash.startsWith("#trends")
     ? trendsPage()
@@ -41,7 +69,10 @@ function navigator() {
     ? categoriesPage()
     : homePage();
 
-    
+    if(infiniteScroll){
+      window.addEventListener('scroll', infiniteScroll, false);
+    }
+
 }
 
 function homePage() {
@@ -77,7 +108,9 @@ function categoriesPage() {
   genericListTitle.innerHTML = decodeURI(nameCategory);
 
   getMoviesByCategory(idCategory);
-  getMovieCategoriesPreview()
+  getMovieCategoriesPreview();
+
+  infiniteScroll = getInfiniteMoviesList;
 }
 
 function movieDetailsPage() {
@@ -92,8 +125,6 @@ function movieDetailsPage() {
 
   const [, hashData] = location.hash.split('=');
   const [movieId, ] = hashData.split('&');
-
-  
 
   getMovieDetailsById(movieId);
 }
@@ -113,21 +144,27 @@ function searchPage() {
 
   genericListTitle.innerHTML = 'Results for: ' + decodeURI(searchData);
   getMoviesBySearch(searchData);
-  
+  infiniteScroll = getInfiniteMoviesList;
 
 }
 
-function trendsPage() {
+async function trendsPage() {
   homeCategoriesView('Trending')
   getTrendingMoviesList();
+
+  infiniteScroll = getInfiniteMoviesList;
 }
 function popularPage() {
   homeCategoriesView('Popular')
   getPopularMoviesList();
+
+  infiniteScroll = getInfiniteMoviesList;
 }
 function upcomingPage() {
   homeCategoriesView('Upcoming')
   getUpcomingMoviesList();
+
+  infiniteScroll = getInfiniteMoviesList;
 }
 
 

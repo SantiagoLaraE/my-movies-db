@@ -11,13 +11,16 @@ const api = axios.create({
 /* API functions*/
 
 async function getMoviesBySearch(query) {
+  const urlAPI = "/search/movie";
   const encoded = encodeURI(query);
-  const { data } = await api("/search/movie", {
+  infiniteScrollParams = {
     params: {
       query: encoded,
     },
-  });
-
+  }
+  const { data } = await api(urlAPI, infiniteScrollParams);
+  endpointInfiniteScroll = urlAPI;
+  maxPage = data.total_pages;
   createMovies(data.results, genericListMoviesPreview);
 }
 
@@ -30,64 +33,76 @@ async function getTrendingMoviesPreview() {
 }
 
 async function getTrendingMoviesList() {
-  const { data } = await api("/trending/movie/week");
-
-  console.log(data);
+  const urlAPI = "/trending/movie/week";
+  const { data } = await api(urlAPI);
+  endpointInfiniteScroll = urlAPI;
+  maxPage = data.total_pages;
 
   createMovies(data.results, genericListMoviesPreview);
+  
+  // const btnLoadMore = document.createElement("button");
+  // btnLoadMore.classList.add("button");
+  // btnLoadMore.innerText = "Cargar Más";
 
-  const btnLoadMore = document.createElement('button');
-  btnLoadMore.classList.add('button');
-  btnLoadMore.innerText = "Cargar Más";
+  // btnLoadMore.addEventListener("click", (e) => {
+  //   e.srcElement.remove();
+  //   getPaginatedTrendingMoviesList();
+  // });
 
-  btnLoadMore.addEventListener('click', (e) => {
-    e.srcElement.remove();
-    getPaginatedTrendingMoviesList();
-  });
-
-  genericListMoviesPreview.appendChild(btnLoadMore);
+  // genericListMoviesPreview.appendChild(btnLoadMore);
+  
 }
 
-let page = 1;
-
-async function getPaginatedTrendingMoviesList() {
-  const {scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-  const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 32);
-
-  if(scrollIsBottom){
-    
-  }
-
-  page++;
-  const { data } = await api("/trending/movie/week" ,{
-    params: {
-      page,
-    }
-  });
-
-  createMovies(data.results, genericListMoviesPreview, {cleanSection: false});
-
-  const btnLoadMore = document.createElement('button');
-  btnLoadMore.classList.add('button');
-  btnLoadMore.innerText = "Cargar Más";
-
-  btnLoadMore.addEventListener('click', (e) => {
-    e.srcElement.remove();
-    getPaginatedTrendingMoviesList();
-  });
-
-  genericListMoviesPreview.appendChild(btnLoadMore);
-}
 async function getPopularMoviesList() {
-  const { data } = await api("/movie/popular");
+  const urlAPI = "/movie/popular";
+  const { data } = await api(urlAPI);
+  endpointInfiniteScroll = urlAPI;
+  maxPage = data.total_pages;
 
   createMovies(data.results, genericListMoviesPreview);
 }
 async function getUpcomingMoviesList() {
-  const { data } = await api("/movie/upcoming");
+  const urlAPI = "/movie/upcoming";
+  const { data } = await api(urlAPI);
+  endpointInfiniteScroll = urlAPI;
+  maxPage = data.total_pages;
 
   createMovies(data.results, genericListMoviesPreview);
+}
+
+async function getInfiniteMoviesList() {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  const scrollIsBottom = (scrollTop + clientHeight >= scrollHeight - 15);
+
+  const pageIsNotMax = (page < maxPage);
+
+  if (scrollIsBottom && pageIsNotMax) {
+
+    page++;
+
+    infiniteScrollParams.params.page = page;
+    
+    const { data } = await api(endpointInfiniteScroll, infiniteScrollParams);
+
+    createMovies(data.results, genericListMoviesPreview, {
+      cleanSection: false,
+    });
+
+  }
+  
+
+
+  // const btnLoadMore = document.createElement('button');
+  // btnLoadMore.classList.add('button');
+  // btnLoadMore.innerText = "Cargar Más";
+
+  // btnLoadMore.addEventListener('click', (e) => {
+  //   e.srcElement.remove();
+  //   getPaginatedTrendingMoviesList();
+  // });
+
+  // genericListMoviesPreview.appendChild(btnLoadMore);
 }
 
 async function getMovieCategoriesPreview() {
@@ -98,13 +113,18 @@ async function getMovieCategoriesPreview() {
 }
 
 async function getMoviesByCategory(id) {
-  const { data } = await api("/discover/movie?with-genres=", {
+  const urlAPI = "/discover/movie?with-genres=";
+  infiniteScrollParams = {
     params: {
       with_genres: id,
     },
-  });
+  }
+  const { data } = await api(urlAPI, infiniteScrollParams);
+  endpointInfiniteScroll = urlAPI;
+  maxPage = data.total_pages;
 
   createMovies(data.results, genericListMoviesPreview);
+
 }
 
 async function getPopularMovies() {
@@ -177,9 +197,7 @@ navLinkbtns.forEach((link) => {
 
 /* Create functions*/
 
-function createMovies(moviesData, renderSection, {cleanSection = true} = {}) {
-
-  console.log(cleanSection);
+function createMovies(moviesData, renderSection, { cleanSection = true } = {}) {
 
   const fragment = new DocumentFragment();
   moviesData.forEach((movie) => {
@@ -202,11 +220,11 @@ function createMovies(moviesData, renderSection, {cleanSection = true} = {}) {
     if (movie.poster_path === null) {
       img.setAttribute(
         "data-image",
-        `https://via.placeholder.com/200x300/191919/ffffff?text=${encodeURI(movie.title)}`
+        `https://via.placeholder.com/200x300/191919/ffffff?text=${encodeURI(
+          movie.title
+        )}`
       );
     }
-
-
 
     lazyLoad.observe(img);
 
@@ -220,7 +238,7 @@ function createMovies(moviesData, renderSection, {cleanSection = true} = {}) {
 
     fragment.appendChild(figure);
   });
-  
+
   if (cleanSection) {
     renderSection.innerHTML = "";
   }
